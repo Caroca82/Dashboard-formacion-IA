@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portal Herramientas IA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Google+Sans+Text:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #ffffff;
+    --bg-secondary: #f8f9fa;
+    --bg-hover: #f1f3f4;
+    --text-primary: #202124;
+    --text-secondary: #5f6368;
+    --text-tertiary: #9aa0a6;
+    --border: #e8eaed;
+    --border-hover: #dadce0;
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --shadow-sm: 0 1px 3px rgba(60,64,67,.12), 0 1px 2px rgba(60,64,67,.08);
+    --shadow-md: 0 2px 6px rgba(60,64,67,.15), 0 1px 4px rgba(60,64,67,.10);
+  }
+
+  body {
+    font-family: 'Google Sans Text', 'Google Sans', Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text-primary);
+    min-height: 100vh;
+    padding: 0;
+  }
+
+  /* HEADER */
+  .site-header {
+    padding: 28px 32px 20px;
+    border-bottom: 1px solid var(--border);
+    background: #fff;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .header-logo {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #4285F4 0%, #0F9D58 50%, #FBBC04 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .header-logo svg { width: 20px; height: 20px; }
+  .header-text {}
+  .header-eyebrow {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-tertiary);
+    letter-spacing: .07em;
+    text-transform: uppercase;
+    line-height: 1;
+    margin-bottom: 3px;
+  }
+  .header-title {
+    font-family: 'Google Sans', Arial, sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.2;
+  }
+
+  /* TIP BAR */
+  .tip-bar {
+    margin: 16px 32px 0;
+    padding: 10px 14px;
+    background: #E8F0FE;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: #1a73e8;
+  }
+  .tip-bar svg { width: 15px; height: 15px; flex-shrink: 0; }
+
+  /* SECTIONS */
+  .sections-wrap { padding: 24px 32px 40px; display: flex; flex-direction: column; gap: 28px; }
+
+  .section-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg-secondary);
+  }
+  .section-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .section-icon svg { width: 17px; height: 17px; }
+  .section-title {
+    font-family: 'Google Sans', Arial, sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+  .section-badge {
+    margin-left: auto;
+    font-size: 11px;
+    color: var(--text-tertiary);
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 2px 10px;
+  }
+
+  /* BUTTON GRID */
+  .btn-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1px;
+    background: var(--border);
+  }
+
+  .url-btn {
+    background: var(--bg);
+    border: none;
+    cursor: pointer;
+    padding: 18px 10px 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    transition: background .15s, transform .1s;
+    position: relative;
+    min-height: 90px;
+    text-decoration: none;
+  }
+  .url-btn:hover { background: var(--bg-hover); }
+  .url-btn:active { transform: scale(.97); }
+
+  .btn-number {
+    position: absolute;
+    top: 7px;
+    left: 9px;
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--text-tertiary);
+  }
+  .btn-icon-wrap {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: box-shadow .15s;
+  }
+  .url-btn:hover .btn-icon-wrap { box-shadow: var(--shadow-md); }
+  .btn-icon-wrap svg { width: 18px; height: 18px; }
+  .btn-label {
+    font-size: 11px;
+    color: var(--text-secondary);
+    text-align: center;
+    line-height: 1.3;
+    max-width: 80px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* ASSIGNED STATE */
+  .url-btn.assigned .btn-label { color: #1a73e8; font-weight: 500; }
+  .url-btn.assigned .btn-icon-wrap { background: #E8F0FE !important; }
+  .url-btn.assigned .btn-icon-wrap svg { color: #1a73e8; }
+
+  /* COLORS PER SECTION */
+  .ia-color       { background: #E8F0FE; } .ia-color svg { color: #1a73e8; }
+  .chatgpt-color  { background: #E6F4EA; } .chatgpt-color svg { color: #137333; }
+  .claude-color   { background: #FEF7E0; } .claude-color svg { color: #B06000; }
+  .gemini-color   { background: #F3E8FD; } .gemini-color svg { color: #7B1FA2; }
+  .lovable-color  { background: #FCE8F1; } .lovable-color svg { color: #C0003C; }
+  .cursor-color   { background: #E6F4F4; } .cursor-color svg { color: #00696D; }
+  .relevance-color { background: #FBE9E7; } .relevance-color svg { color: #B71C1C; }
+
+  /* FOOTER */
+  .footer {
+    text-align: center;
+    padding: 12px 32px 28px;
+    font-size: 11px;
+    color: var(--text-tertiary);
+  }
+
+  /* MODAL OVERLAY */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(32,33,36,.45);
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: #fff;
+    border-radius: var(--radius-lg);
+    width: 360px;
+    max-width: 90vw;
+    box-shadow: 0 8px 28px rgba(32,33,36,.25);
+    overflow: hidden;
+    animation: slideUp .18s ease;
+  }
+  @keyframes slideUp { from { opacity:0; transform: translateY(12px); } to { opacity:1; transform: translateY(0); } }
+  .modal-header {
+    padding: 18px 20px 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .modal-title {
+    font-family: 'Google Sans', Arial, sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+  .modal-sub {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-top: 2px;
+  }
+  .modal-body { padding: 16px 20px; display: flex; flex-direction: column; gap: 12px; }
+  .modal-label { font-size: 12px; font-weight: 500; color: var(--text-secondary); margin-bottom: 4px; }
+  .modal-input {
+    width: 100%;
+    height: 38px;
+    border: 1px solid var(--border-hover);
+    border-radius: var(--radius-sm);
+    padding: 0 12px;
+    font-family: inherit;
+    font-size: 13px;
+    color: var(--text-primary);
+    outline: none;
+    transition: border-color .15s;
+  }
+  .modal-input:focus { border-color: #1a73e8; box-shadow: 0 0 0 2px rgba(26,115,232,.18); }
+  .modal-footer {
+    padding: 12px 20px 16px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    border-top: 1px solid var(--border);
+  }
+  .btn-cancel {
+    height: 34px;
+    padding: 0 16px;
+    border: 1px solid var(--border-hover);
+    border-radius: 20px;
+    background: #fff;
+    font-family: 'Google Sans', Arial, sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: background .15s;
+  }
+  .btn-cancel:hover { background: var(--bg-hover); }
+  .btn-save {
+    height: 34px;
+    padding: 0 18px;
+    border: none;
+    border-radius: 20px;
+    background: #1a73e8;
+    font-family: 'Google Sans', Arial, sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: #fff;
+    cursor: pointer;
+    transition: background .15s, box-shadow .15s;
+  }
+  .btn-save:hover { background: #1557b0; box-shadow: var(--shadow-sm); }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="header-logo">
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="12" cy="12" r="10" fill="white" opacity=".25"/>
+      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z" fill="white"/>
+    </svg>
+  </div>
+  <div class="header-text">
+    <p class="header-eyebrow">Portal de recursos</p>
+    <p class="header-title">Herramientas de Inteligencia Artificial</p>
+  </div>
+</header>
+
+<div class="tip-bar">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+  Haz clic en cualquier botón para asignarle una URL y un nombre personalizado.
+</div>
+
+<div class="sections-wrap" id="sections-wrap"></div>
+
+<p class="footer">Portal gestionado en Google Sites &nbsp;·&nbsp; Actualizado automáticamente</p>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal">
+    <div class="modal-header">
+      <p class="modal-title" id="modal-title">Configurar enlace</p>
+      <p class="modal-sub" id="modal-sub">Asigna una URL y un nombre a este botón</p>
+    </div>
+    <div class="modal-body">
+      <div>
+        <p class="modal-label">URL de destino</p>
+        <input class="modal-input" id="modal-url" type="url" placeholder="https://..." />
+      </div>
+      <div>
+        <p class="modal-label">Nombre del botón</p>
+        <input class="modal-input" id="modal-name" type="text" placeholder="Ej: GPT-4o, Claude Sonnet..." />
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-cancel" id="modal-cancel">Cancelar</button>
+      <button class="btn-save" id="modal-save">Guardar</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const SECTIONS = [
+  { id:"ia",        name:"IA",         colorClass:"ia-color",        icon:'<path d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 0 1 7 7h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v1a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-1H1a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1a7 7 0 0 1 7-7h1V5.73c-.6-.34-1-.99-1-1.73a2 2 0 0 1 2-2M7.5 13A2.5 2.5 0 0 0 5 15.5 2.5 2.5 0 0 0 7.5 18 2.5 2.5 0 0 0 10 15.5 2.5 2.5 0 0 0 7.5 13m9 0a2.5 2.5 0 0 0-2.5 2.5 2.5 2.5 0 0 0 2.5 2.5 2.5 2.5 0 0 0 2.5-2.5A2.5 2.5 0 0 0 16.5 13z"/>' },
+  { id:"chatgpt",   name:"Chat GPT",   colorClass:"chatgpt-color",   icon:'<path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM9 11H7V9h2v2zm4 0h-2V9h2v2zm4 0h-2V9h2v2z"/>' },
+  { id:"claude",    name:"Claude",     colorClass:"claude-color",    icon:'<path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9-4.03-9-9-9zm-1 14H9V7h2v10zm4 0h-2v-6h2v6zm0-8h-2V7h2v2z"/>' },
+  { id:"gemini",    name:"Gemini",     colorClass:"gemini-color",    icon:'<path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 4l5 2.18V11c0 3.5-2.33 6.79-5 7.93-2.67-1.14-5-4.43-5-7.93V7.18L12 5z"/>' },
+  { id:"lovable",   name:"Lovable",    colorClass:"lovable-color",   icon:'<path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>' },
+  { id:"cursor",    name:"Cursor",     colorClass:"cursor-color",    icon:'<path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/>' },
+  { id:"relevance", name:"Relevance",  colorClass:"relevance-color", icon:'<path d="M3.5 18.49l6-6.01 4 4L22 6.92l-1.41-1.41-7.09 7.97-4-4L2 16.99z"/>' },
+];
+
+const BTN_ICONS = [
+  '<path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1 0 1.71-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>',
+  '<path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>',
+  '<path d="M8 5v14l11-7z"/>',
+  '<path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z"/>',
+  '<path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"/>',
+  '<path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm4.24 16L12 15.45 7.77 18l1.12-4.81-3.73-3.23 4.92-.42L12 5l1.92 4.53 4.92.42-3.73 3.23L16.23 18z"/>',
+  '<path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>',
+  '<path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/>',
+  '<path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/>',
+  '<path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14l-5-5 1.41-1.41L12 14.17l7.59-7.59L21 8l-9 9z"/>',
+];
+
+const DEFAULT_LABELS = [
+  "Enlace 1","Enlace 2","Enlace 3","Enlace 4","Enlace 5",
+  "Enlace 6","Enlace 7","Enlace 8","Enlace 9","Enlace 10"
+];
+
+// Storage key
+const STORE_KEY = "ai-portal-data";
+
+function loadData() {
+  try { return JSON.parse(localStorage.getItem(STORE_KEY) || "{}"); } catch { return {}; }
+}
+function saveData(d) {
+  try { localStorage.setItem(STORE_KEY, JSON.stringify(d)); } catch {}
+}
+
+let data = loadData();
+let currentBtn = null;
+
+// Build UI
+const wrap = document.getElementById("sections-wrap");
+
+SECTIONS.forEach(sec => {
+  const card = document.createElement("div");
+  card.className = "section-card";
+
+  const header = document.createElement("div");
+  header.className = "section-header";
+  header.innerHTML = `
+    <div class="section-icon ${sec.colorClass}">
+      <svg viewBox="0 0 24 24" fill="currentColor">${sec.icon}</svg>
+    </div>
+    <span class="section-title">${sec.name}</span>
+    <span class="section-badge">10 botones</span>
+  `;
+  card.appendChild(header);
+
+  const grid = document.createElement("div");
+  grid.className = "btn-grid";
+
+  for (let i = 0; i < 10; i++) {
+    const key = `${sec.id}-${i}`;
+    const saved = data[key] || {};
+
+    const btn = document.createElement("button");
+    btn.className = "url-btn" + (saved.url ? " assigned" : "");
+    btn.dataset.key = key;
+    btn.dataset.section = sec.name;
+    btn.dataset.index = i;
+    btn.innerHTML = `
+      <span class="btn-number">${String(i+1).padStart(2,"0")}</span>
+      <div class="btn-icon-wrap ${sec.colorClass}">
+        <svg viewBox="0 0 24 24" fill="currentColor">${BTN_ICONS[i]}</svg>
+      </div>
+      <span class="btn-label">${saved.name || DEFAULT_LABELS[i]}</span>
+    `;
+
+    btn.addEventListener("click", () => {
+      if (saved.url) {
+        window.open(saved.url, "_blank");
+      } else {
+        openModal(btn, key, sec.name, i, saved);
+      }
+    });
+
+    btn.addEventListener("contextmenu", (e) => {
+      e.preventDefault();
+      openModal(btn, key, sec.name, i, saved);
+    });
+
+    grid.appendChild(btn);
+  }
+
+  card.appendChild(grid);
+  wrap.appendChild(card);
+});
+
+// MODAL LOGIC
+const overlay = document.getElementById("modal-overlay");
+const modalTitle = document.getElementById("modal-title");
+const modalSub = document.getElementById("modal-sub");
+const modalUrl = document.getElementById("modal-url");
+const modalName = document.getElementById("modal-name");
+
+function openModal(btn, key, secName, idx, saved) {
+  currentBtn = { btn, key, secName, idx, saved };
+  modalTitle.textContent = `Configurar botón ${DEFAULT_LABELS[idx]}`;
+  modalSub.textContent = `Sección: ${secName}`;
+  modalUrl.value = saved.url || "";
+  modalName.value = saved.name || "";
+  overlay.classList.add("open");
+  setTimeout(() => modalUrl.focus(), 80);
+}
+
+function closeModal() {
+  overlay.classList.remove("open");
+  currentBtn = null;
+}
+
+document.getElementById("modal-cancel").addEventListener("click", closeModal);
+overlay.addEventListener("click", (e) => { if (e.target === overlay) closeModal(); });
+
+document.getElementById("modal-save").addEventListener("click", () => {
+  if (!currentBtn) return;
+  const { btn, key, idx } = currentBtn;
+  const url = modalUrl.value.trim();
+  const name = modalName.value.trim() || DEFAULT_LABELS[idx];
+
+  data[key] = { url, name };
+  saveData(data);
+
+  btn.querySelector(".btn-label").textContent = name;
+  if (url) {
+    btn.classList.add("assigned");
+    btn.onclick = () => window.open(url, "_blank");
+    btn.addEventListener("contextmenu", (e) => {
+      e.preventDefault();
+      openModal(btn, key, currentBtn ? currentBtn.secName : "", idx, data[key]);
+    });
+  } else {
+    btn.classList.remove("assigned");
+  }
+
+  closeModal();
+});
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") closeModal();
+  if (e.key === "Enter" && overlay.classList.contains("open")) {
+    document.getElementById("modal-save").click();
+  }
+});
+</script>
+</body>
+</html>
